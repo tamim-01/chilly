@@ -15,7 +15,7 @@ export default function SelectLang() {
           return;
         }
       }}
-      className="text-base leading-normal"
+      className="text-base md:text-[22px] leading-normal"
       options={[
         {
           label: "EN",
