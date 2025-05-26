@@ -142,11 +142,13 @@ const Select = ({
   }, []);
 
   const containerStyles = `
-    relative text-left ${fullWidth ? "w-full" : "w-fit"} ${className}
+    relative cursor-pointer text-left ${
+      fullWidth ? "w-full" : "w-fit"
+    } ${className}
   `;
 
   const triggerStyles = `
-    w-fit border rounded-xl px-3 py-3 transition flex flex-row gap-6 items-center 
+    border rounded-[16px] md:px-6 px-3 py-3 transition flex flex-row justify-between gap-6 items-center 
     ${disabled ? "bg-muted text-muted-foreground cursor-not-allowed" : ""}
     ${
       variant === "ghost"
