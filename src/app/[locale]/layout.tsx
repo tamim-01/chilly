@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Itim, Irish_Grover } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar/Navbar";
+import { TLanguages } from "@/utils/getTranslation";
 
 const geistSans = Itim({
   weight: "400",
@@ -19,14 +20,16 @@ export const metadata: Metadata = {
   title: "Hot chilly",
   description: "",
 };
-
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface LayoutProps {
   children: React.ReactNode;
-}>) {
+  params: Promise<{
+    locale: TLanguages;
+  }>;
+}
+export default async function RootLayout({ children, params }: LayoutProps) {
+  const { locale } = await params;
   return (
-    <html lang="en">
+    <html lang={locale} dir={locale === "fa" ? "rtl" : "ltr"}>
       <body
         className={`${geistSans.variable} ${geistIrish.variable}  antialiased`}
       >
