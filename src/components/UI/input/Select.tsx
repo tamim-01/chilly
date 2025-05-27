@@ -142,7 +142,7 @@ const Select = ({
   }, []);
 
   const containerStyles = `
-    relative cursor-pointer text-left transition-all active:scale-[0.98] duration-200 ${
+    relative cursor-pointer transition-all active:scale-[0.98] duration-200 ${
       fullWidth ? "w-full" : "w-fit"
     } ${className}
   `;
