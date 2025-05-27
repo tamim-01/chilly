@@ -1,20 +1,14 @@
 "use client";
 import Image from "next/image";
 import Select from "../UI/input/Select";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import Skeleton from "../UI/skeleton/skeleton";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function SelectLang() {
-  const [lang, setLang] = useState<string | null>(null);
   const router = useRouter();
-  useEffect(() => {
-    const saved = localStorage.getItem("language") || "en";
-    if (saved) {
-      setLang(saved);
-      router.replace(saved);
-    }
-  }, [router]);
+  const pathName = usePathname();
+  const langFromUrl = pathName.split("/")[1];
+  const lang = langFromUrl;
 
   return (
     <>
@@ -24,9 +18,9 @@ export default function SelectLang() {
             fullWidth
             onChange={(val) => {
               if (typeof val === "string") {
-                localStorage.setItem("language", val);
-                setLang(val);
-                router.replace(val);
+                document.cookie = `locale=${val}; path=/; max-age=31536000`;
+                const newPath = pathName.replace(/^\/(en|fa)/, `/${val}`);
+                router.push(newPath);
               } else {
                 return;
               }
