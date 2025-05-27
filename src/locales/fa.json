@@ -3,6 +3,13 @@
     "title": {
       "one": "HOT CHILLY",
       "two": " غذاهای تند اینجا پیدا میشن!"
+    },
+    "search_input": { "label": "جستجو", "placeholder": "اسم غذا..." },
+    "category": {
+      "label": "دسته بندی"
+    },
+    "filter": {
+      "label": "فیلتر"
     }
   }
 }
