@@ -142,7 +142,7 @@ const Select = ({
   }, []);
 
   const containerStyles = `
-    relative cursor-pointer text-left ${
+    relative cursor-pointer text-left transition-all active:scale-[0.98] duration-200 ${
       fullWidth ? "w-full" : "w-fit"
     } ${className}
   `;
@@ -241,7 +241,7 @@ const Select = ({
   return (
     <div className={containerStyles} ref={selectRef}>
       {label && (
-        <label htmlFor={id} className="block font-medium mb-1">
+        <label htmlFor={id} className="block font-medium mb-1.5">
           {label}
         </label>
       )}
@@ -256,7 +256,7 @@ const Select = ({
       </div>
 
       {isOpen && (
-        <ul className="absolute z-50 mt-1 w-full bg-secondary border border-input rounded shadow-md max-h-60 overflow-auto">
+        <ul className="absolute z-50 mt-1 w-full bg-secondary border border-input rounded-[16px] shadow-md max-h-60 overflow-auto">
           {selectOptions.length > 0 ? (
             selectOptions.map((option, i) => {
               const selected = isSelected(option.value);
