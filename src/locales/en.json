@@ -4,12 +4,12 @@
       "one": "HOT CHILLY !!!",
       "two": "Where the Heat Meets the Hype!"
     },
-    "search_input": { "label": "search here", "placeholder": "search..." },
+    "search_input": { "label": "Search here", "placeholder": "Search..." },
     "category": {
       "label": "Category"
     },
     "filter": {
-      "label": "filter"
+      "label": "Filter"
     }
   }
 }
