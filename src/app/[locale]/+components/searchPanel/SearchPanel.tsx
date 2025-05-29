@@ -1,17 +1,16 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import TextInput from "../UI/input/TextInput";
 import { useEffect, useState } from "react";
-import Select from "../UI/input/Select";
+import TextInput from "../../../../components/UI/input/TextInput";
 import { OPTIONS } from "./options";
 import getTranslation, { TLanguages } from "@/utils/getTranslation";
 import { variables } from "@/locales/variables";
-export function SearchPanel() {
+import Select from "@/components/UI/input/Select";
+export function SearchPanel({ locale }: { locale: TLanguages }) {
   const [query, setQuery] = useState<null | string>(null);
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
-  const locale = pathname.split("/")[1] as TLanguages;
   const t = getTranslation(locale, variables);
   const handleSearch = (slug: string) => {
     setQuery(slug);
@@ -96,7 +95,6 @@ export function SearchPanel() {
           defaultValue={searchParams.get("query")?.toString()}
         />
       </div>
-
       <div className="md:w-5/12 w-6/12 flex flex-row gap-2">
         <Select
           label={t("menu.category.label")}
