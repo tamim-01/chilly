@@ -2,7 +2,7 @@ import Hero from "@/app/[locale]/+components/Hero";
 import { SearchPanel } from "@/app/[locale]/+components/searchPanel/SearchPanel";
 import { TLanguages } from "@/utils/getTranslation";
 import Menu from "./+components/Menu";
-import { Pagination } from "./+components/Pagintaion";
+import { Pagination } from "./+components/Pagination";
 interface PageProps {
   params: Promise<{
     locale: TLanguages;
