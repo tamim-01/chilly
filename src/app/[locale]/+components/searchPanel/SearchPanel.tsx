@@ -38,7 +38,8 @@ export function SearchPanel({ locale }: { locale: TLanguages }) {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       const params = new URLSearchParams(searchParams);
-      params.set("page", String(1));
+      const currentPage = params.get("page");
+      params.set("page", currentPage ?? "1");
       if (!params.get("category")) {
         params.set("category", "all");
       }
