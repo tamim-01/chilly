@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import Select from "../UI/input/Select";
 import { usePathname, useRouter } from "next/navigation";
+import Select from "../UI/input/Select";
 
-export default function SelectLang() {
+export default function LangSwitcher() {
   const router = useRouter();
   const pathName = usePathname();
   const langFromUrl = pathName.split("/")[1];

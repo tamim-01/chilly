@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Itim, Irish_Grover } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/navbar/Navbar";
 import { TLanguages } from "@/utils/getTranslation";
+import { Header } from "@/components/Layout/Header";
 
 const geistSans = Itim({
   weight: "400",
@@ -33,8 +33,10 @@ export default async function RootLayout({ children, params }: LayoutProps) {
       <body
         className={`${geistSans.variable} ${geistIrish.variable}  antialiased`}
       >
-        <Navbar />
-        {children}
+        <Header />
+        <main className="container max-w-[1440px] mx-auto p-6 md:px-16 md:py-8 flex flex-col">
+          {children}
+        </main>
       </body>
     </html>
   );
