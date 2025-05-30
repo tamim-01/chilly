@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Itim, Irish_Grover } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { TLanguages } from "@/utils/getTranslation";
 import { Header } from "@/components/Layout/Header";
 
@@ -26,7 +26,7 @@ interface LayoutProps {
     locale: TLanguages;
   }>;
 }
-export default async function RootLayout({ children, params }: LayoutProps) {
+export default async function LocaleLayout({ children, params }: LayoutProps) {
   const { locale } = await params;
   return (
     <html lang={locale} dir={locale === "fa" ? "rtl" : "ltr"}>
