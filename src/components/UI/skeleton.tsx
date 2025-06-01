@@ -31,7 +31,7 @@ const Skeleton: FC<SkeletonProps> = ({
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className={`bg-gray-700 animate-pulse ${roundedClass} ${className}`}
+          className={`bg-secondary opacity-80 animate-pulse ${roundedClass} ${className}`}
           style={{ width, height, marginBottom: count > 1 ? "0.5rem" : "0" }}
         />
       ))}
