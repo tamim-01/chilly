@@ -1,11 +1,11 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import TextInput from "../../../../components/UI/input/TextInput";
+import TextInput from "../../../../components/UI/inputs/TextInput";
 import { OPTIONS } from "./options";
 import getTranslation, { TLanguages } from "@/utils/getTranslation";
 import { variables } from "@/locales/variables";
-import Select from "@/components/UI/input/Select";
+import Select from "@/components/UI/inputs/Select";
 export function SearchPanel({ locale }: { locale: TLanguages }) {
   const [query, setQuery] = useState<null | string>(null);
   const searchParams = useSearchParams();
