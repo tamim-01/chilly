@@ -1,0 +1,156 @@
+"use client";
+import Image from "next/image";
+import Badge from "../UI/Badge";
+import { useState } from "react";
+
+export default function MenuItem({ item }: { item: MenuItem }) {
+  const [open, setOpen] = useState(false);
+  const { title, price, images, description, spicy } = item;
+  const offer = price.discount && price.afterDiscount;
+  return (
+    <li
+      className=" cursor-pointer border-b-1 border-gray-600 transition-all duration-500"
+      onClick={() => {
+        setOpen(!open);
+      }}
+    >
+      <div className="relative float-left clear-none overflow-hidden md:w-[262px] md:h-[262px] w-[172px] h-[172px] rounded-3xl border border-foreground mr-4 md:mr-20 mb-0.5">
+        <Image
+          src={images[0]}
+          alt={title}
+          fill
+          sizes="(max-width: 768px) 100vw"
+        />
+        {offer && (
+          <div className="absolute -rotate-45 font-bold top-6 left-[-38px]  text-[12px] px-8 py-1 bg-red-500">
+            Special Offer!!!
+          </div>
+        )}
+      </div>
+      <div className="md:min-h-[262px]">
+        <h2 className="md:text-3xl text-lg mb-3">
+          {title}
+          <span
+            className={`md:ml-6 mx-2 ${offer && "line-through text-gray-500"}`}
+          >
+            {price.value}$
+          </span>
+          {offer && <span>{price.afterDiscount}$</span>}
+        </h2>
+        <p className={`md:text-2xl mb-3 text-base ${!open && "line-clamp-4"}`}>
+          {description}
+        </p>
+        {spicy && <Badge size="lg">Spicy</Badge>}
+      </div>
+
+      <div
+        className={`${
+          open ? "flex" : "hidden"
+        } flex-row flex-wrap md:gap-5 gap-2 transition-all fade-in mt-6`}
+      >
+        {images.map((i, index) => {
+          return (
+            <div
+              key={index}
+              className="relative overflow-hidden md:w-[200px] md:h-[200px] w-[100px] h-[100px] rounded-3xl border border-foreground"
+            >
+              <Image
+                src={i}
+                alt={title}
+                fill
+                sizes="(max-width: 768px) 100vw"
+              />
+            </div>
+          );
+        })}
+      </div>
+      <button
+        className={`w-full cursor-pointer py-6 flex justify-center transition-all duration-200 ${
+          open && "rotate-180"
+        }`}
+        onClick={() => {
+          setOpen(!open);
+        }}
+      >
+        <svg
+          width="20"
+          height="12"
+          viewBox="0 0 20 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9.99286 7.34329e-05C10.2001 7.34329e-05 10.3969 0.0374346 10.5833 0.112157C10.7694 0.186602 10.9443 0.305629 11.1079 0.46924L19.1537 8.51507C19.4598 8.82118 19.6081 9.1941 19.5987 9.63382C19.5895 10.0738 19.4319 10.4469 19.1258 10.753C18.8197 11.0591 18.4466 11.2122 18.0066 11.2122C17.5669 11.2122 17.194 11.0591 16.8879 10.753L9.99286 3.83007L3.06995 10.753C2.76384 11.0591 2.3955 11.2076 1.96495 11.1984C1.53439 11.189 1.16606 11.0312 0.859947 10.7251C0.553837 10.419 0.40078 10.046 0.40078 9.60632C0.40078 9.16632 0.553837 8.79327 0.859947 8.48716L8.87786 0.46924C9.04147 0.305629 9.21634 0.186602 9.40245 0.112157C9.58884 0.0374346 9.78564 7.34329e-05 9.99286 7.34329e-05Z"
+            fill="#5D5D5D"
+          />
+        </svg>
+      </button>
+    </li>
+  );
+}
+//   <article className=" relative flex flex-col gap-10 border-b border-gray-600 transition-all duration-500 ">
+//       <div className="flex flex-row md:gap-20 gap-3 justify-between">
+//         <div className="relative overflow-hidden md:w-[262px] md:h-[262px] w-[172px] h-[172px] rounded-3xl border border-foreground">
+//           <Image
+//             src={images[0]}
+//             alt={title}
+//             fill
+//             sizes="(max-width: 768px) 100vw"
+//           />
+//         </div>
+//         <div className="absolute w-full flex flex-row  md:space-y-6 space-y-3">
+
+//           <div>
+//             <h2 className="md:text-3xl text-lg ">
+//               {title} <span className="ml-6">{price.value}$</span>
+//             </h2>
+//             <p className={`md:text-2xl text-base ${!open && "line-clamp-3"}`}>
+//               {description}
+//             </p>
+//             {spicy && <Badge size="lg">Spicy</Badge>}
+//           </div>
+//         </div>
+//       </div>
+//   <div
+//     className={`${
+//       open ? "flex" : "hidden"
+//     } flex-row gap-5 transition-all fade-in`}
+//   >
+//     {images.map((i) => {
+//       return (
+//         <div
+//           key={i}
+//           className="relative overflow-hidden md:w-[200px] md:h-[200px] w-[100px] h-[100px] rounded-3xl border border-foreground"
+//         >
+//           <Image
+//             src={i}
+//             alt={title}
+//             fill
+//             sizes="(max-width: 768px) 100vw"
+//           />
+//         </div>
+//       );
+//     })}
+//   </div>
+//   <button
+//     className={`w-full cursor-pointer py-6 flex justify-center transition-all duration-200 ${
+//       open && "rotate-180"
+//     }`}
+//     onClick={() => {
+//       setOpen(!open);
+//     }}
+//   >
+//     <svg
+//       width="20"
+//       height="12"
+//       viewBox="0 0 20 12"
+//       fill="none"
+//       xmlns="http://www.w3.org/2000/svg"
+//     >
+//       <path
+//         d="M9.99286 7.34329e-05C10.2001 7.34329e-05 10.3969 0.0374346 10.5833 0.112157C10.7694 0.186602 10.9443 0.305629 11.1079 0.46924L19.1537 8.51507C19.4598 8.82118 19.6081 9.1941 19.5987 9.63382C19.5895 10.0738 19.4319 10.4469 19.1258 10.753C18.8197 11.0591 18.4466 11.2122 18.0066 11.2122C17.5669 11.2122 17.194 11.0591 16.8879 10.753L9.99286 3.83007L3.06995 10.753C2.76384 11.0591 2.3955 11.2076 1.96495 11.1984C1.53439 11.189 1.16606 11.0312 0.859947 10.7251C0.553837 10.419 0.40078 10.046 0.40078 9.60632C0.40078 9.16632 0.553837 8.79327 0.859947 8.48716L8.87786 0.46924C9.04147 0.305629 9.21634 0.186602 9.40245 0.112157C9.58884 0.0374346 9.78564 7.34329e-05 9.99286 7.34329e-05Z"
+//         fill="#5D5D5D"
+//       />
+//     </svg>
+//   </button>
+//     </article>
