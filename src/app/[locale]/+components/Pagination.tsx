@@ -44,26 +44,27 @@ export function Pagination({ pageCount }: Readonly<PaginationProps>) {
     params.set("page", pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
+  if (pageCount > 0) {
+    return (
+      <div className="flex flex-row items-center justify-center py-8">
+        <PaginationArrow
+          direction="left"
+          href={createPageURL(currentPage - 1)}
+          isDisabled={currentPage <= 1}
+        />
 
-  return (
-    <div className="flex flex-row items-center justify-center py-8">
-      <PaginationArrow
-        direction="left"
-        href={createPageURL(currentPage - 1)}
-        isDisabled={currentPage <= 1}
-      />
+        <div>
+          <span className="p-4 font-semibold text-foreground">
+            Page {currentPage}
+          </span>
+        </div>
 
-      <div>
-        <span className="p-4 font-semibold text-foreground">
-          Page {currentPage}
-        </span>
+        <PaginationArrow
+          direction="right"
+          href={createPageURL(currentPage + 1)}
+          isDisabled={currentPage >= pageCount}
+        />
       </div>
-
-      <PaginationArrow
-        direction="right"
-        href={createPageURL(currentPage + 1)}
-        isDisabled={currentPage >= pageCount}
-      />
-    </div>
-  );
+    );
+  }
 }
