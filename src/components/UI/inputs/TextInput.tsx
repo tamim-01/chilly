@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 export const variants = {
   default: {
     default:
-      "border-2 border-foreground rounded-[16px] bg-secondary focus:outline-primary focus:outline-2 placeholder:text-primary-foreground",
+      "border border-foreground rounded-[16px] bg-secondary focus:outline-primary focus:outline-2 placeholder:text-primary-foreground",
     error:
       "border-3 border-red-500 rounded-[16px] hover:bg-red-100 opacity-75 focus:outline-red-500 focus:outline-2 placeholder:text-red-400",
     disabled:
