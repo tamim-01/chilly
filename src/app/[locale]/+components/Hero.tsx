@@ -5,13 +5,14 @@ import Image from "next/image";
 export default function Hero({ locale }: { locale: TLanguages }) {
   const t = getTranslation(locale, variables);
   return (
-    <section className="flex flex-col md:flex-row w-full items-center gap-6 md:gap-16 justify-center py-16 ">
+    <section className="flex flex-col md:flex-row w-full items-center gap-6 md:gap-16 justify-center py-12">
       <div className="relative w-[160px] h-[148px] md:w-[310px] md:h-[286px]">
         <Image
           src={"/image/pan.png"}
           fill
           alt="pan-image"
           sizes="(max-width: 768px) 100vw"
+          priority
         />
       </div>
       <section className="flex flex-col items-center  md:items-start">
