@@ -4,7 +4,6 @@ import Badge from "../../UI/Badge";
 import { useState } from "react";
 
 export default function MenuItem({ item }: { item: MenuItem }) {
-  console.log("item => ", item);
   const [open, setOpen] = useState(false);
   const { title, payment_type, image_urls, description, spicy } = item;
   const offer = payment_type.discount && payment_type.afterDiscount;
@@ -15,16 +14,18 @@ export default function MenuItem({ item }: { item: MenuItem }) {
         setOpen(!open);
       }}
     >
-      <div className="relative float-left clear-none overflow-hidden md:w-[262px] md:h-[262px] w-[172px] h-[172px] rounded-3xl border border-foreground mr-4 md:mr-20 mb-0.5">
+      <div className="relative shadow-2xl  float-left clear-none overflow-hidden md:w-[262px] md:h-[262px] w-[172px] h-[172px] rounded-3xl border border-foreground mr-4 md:mr-20 mb-0.5">
         <Image
           src={image_urls[0]}
           alt={title}
           fill
+          className="w-full h-full top-0 left-0 object-cover"
           sizes="(max-width: 768px) 100vw"
+          loading="lazy"
         />
         {offer && (
-          <div className="absolute -rotate-45 font-bold top-6 left-[-38px]  text-[12px] px-8 py-1 bg-red-500">
-            Special Offer!!!
+          <div className="absolute -rotate-45 font-bold top-4 left-[-32px]  text-[12px] px-8 py-1 bg-red-500">
+            %{payment_type.discount} OFF !!!
           </div>
         )}
       </div>
@@ -59,7 +60,9 @@ export default function MenuItem({ item }: { item: MenuItem }) {
                 src={i}
                 alt={title}
                 fill
+                className="w-full shadow-2xl h-full top-0 left-0 object-cover"
                 sizes="(max-width: 768px) 100vw"
+                loading="lazy"
               />
             </div>
           );
