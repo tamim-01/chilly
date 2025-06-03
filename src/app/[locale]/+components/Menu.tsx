@@ -21,7 +21,6 @@ export default function Menu() {
     const query = params.get("query");
     const category = params.get("category");
     const filter = params.get("filter");
-    console.log("query => ", query);
     const fetchData = async () => {
       try {
         const response = await fetch(
