@@ -18,12 +18,18 @@ export default function Menu() {
   const perPage = 8;
   useEffect(() => {
     const page = params.get("page");
+    const query = params.get("query");
+    const category = params.get("category");
+    const filter = params.get("filter");
+    console.log("query => ", query);
     const fetchData = async () => {
       try {
         const response = await fetch(
           `http://localhost:3001/api/menu/${
             page && parseInt(page) - 1
-          }?count=${perPage}`
+          }?count=${perPage}&category=${category}&filter=${filter}&${
+            query ? `query=${query.trim().toLowerCase()}` : ""
+          }`
         );
         if (!response.ok) {
           throw new Error("Sorry we are facing an error please try again.");
