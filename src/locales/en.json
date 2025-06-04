@@ -1,7 +1,7 @@
 {
   "menu": {
     "title": {
-      "one": "HOT CHILLY !!!",
+      "one": "[restaurant] !!!",
       "two": "Where the Heat Meets the Hype!"
     },
     "search_input": { "label": "Search here", "placeholder": "Search..." },

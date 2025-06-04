@@ -22,12 +22,12 @@ export function getNestedValue<T extends Record<string, unknown>>(
 }
 
 function getTranslation(
-  lang: TLanguages,
-  variables: Record<TLanguages, Record<string, string>>
+  locale: TLanguages,
+  variables?: Record<TLanguages, Record<string, string>>
 ): (key: TKeysOfContent) => string {
   const translate = (key: TKeysOfContent) => {
     const value =
-      getNestedValue(languages[lang], key) ??
+      getNestedValue(languages[locale], key) ??
       getNestedValue(languages["en"], key) ??
       key;
 
@@ -35,8 +35,8 @@ function getTranslation(
       .split(" ")
       .map((c) => {
         const variable = c.match(/^\[(\D+)\]$/);
-        if (variable) {
-          return c.replace(/^\[(\D+)\]$/, variables[lang][variable[1]]);
+        if (variable && variables) {
+          return c.replace(/^\[(\D+)\]$/, variables[locale][variable[1]]);
         }
         return c;
       })

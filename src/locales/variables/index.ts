@@ -1,4 +1,4 @@
 export const variables = {
-  en: {},
-  fa: {},
+  en: { restaurant: "HOT CHILLY" },
+  fa: { restaurant: "HOT CHILLY" },
 };
