@@ -2,8 +2,7 @@
 import MenuItem from "@/components/Common/MenuItem/MenuItem";
 import MenuItemSkeleton from "@/components/Common/MenuItem/MenuItemSkeleton";
 import Button from "@/components/UI/Button";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Pagination } from "./Pagination";
 
@@ -15,6 +14,7 @@ export default function Menu() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown | null>(null);
   const params = useSearchParams();
+  const { refresh } = useRouter();
   const perPage = 8;
   useEffect(() => {
     const page = params.get("page");
@@ -63,9 +63,15 @@ export default function Menu() {
             ? "Network Error please try again"
             : "Sorry we are facing an error please try again."}
         </h2>
-        <Link href={"/"}>
-          <Button variant="secondary">Refresh</Button>
-        </Link>
+
+        <Button
+          onClick={() => {
+            refresh();
+          }}
+          variant="secondary"
+        >
+          Refresh
+        </Button>
       </section>
     );
   }
