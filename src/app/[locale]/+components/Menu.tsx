@@ -9,21 +9,19 @@ import useFetchedData from "@/hooks/useFetchedData";
 export default function Menu() {
   const params = useSearchParams();
   const { refresh } = useRouter();
-  const perPage = 8;
-  const page = params.get("page");
-  const query = params.get("query")?.trim().toLowerCase();
-  const category = params.get("category");
-  const filter = params.get("filter");
+  const page = params.get("page") ?? "1";
+  const perPage = "8";
+  const searchParams = {
+    count: perPage,
+    category: params.get("category") ?? "all",
+    filter: params.get("filter") ?? "all",
+    query: params.get("query")?.trim().toLowerCase() ?? "",
+  };
+  const urlParams = new URLSearchParams(searchParams);
   const { data, error, loading } = useFetchedData<{
     items: MenuItem[];
     totalPages: number;
-  }>(
-    `http://localhost:3001/api/menu/${
-      page && parseInt(page) - 1
-    }?count=${perPage}&category=${category}&filter=${filter}&${
-      query ? `query=${query}` : ""
-    }`
-  );
+  }>(`http://localhost:3001/api/menu/${page}?${urlParams}`);
 
   if (loading)
     return (
