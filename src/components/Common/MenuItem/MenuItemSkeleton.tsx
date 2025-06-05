@@ -10,7 +10,7 @@ export default function MenuItem() {
         <div className="relative md:w-24 md:h-8 w-16 h-6 my-4">
           {<Skeleton width="100%" height="100%" />}
         </div>
-        <div className="relative md:w-[684px] w-[180px] flex flex-col">
+        <div className="relative md:w-[800px] w-[180px] flex flex-col">
           {<Skeleton count={3} width="100%" height="32px" />}
         </div>
       </div>

@@ -3,50 +3,28 @@ import MenuItem from "@/components/Common/MenuItem/MenuItem";
 import MenuItemSkeleton from "@/components/Common/MenuItem/MenuItemSkeleton";
 import Button from "@/components/UI/Button";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 import { Pagination } from "./Pagination";
+import useFetchedData from "@/hooks/useFetchedData";
 
 export default function Menu() {
-  const [data, setData] = useState<{
-    items: MenuItem[];
-    totalPages: number;
-  } | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<unknown | null>(null);
   const params = useSearchParams();
   const { refresh } = useRouter();
   const perPage = 8;
-  useEffect(() => {
-    const page = params.get("page");
-    const query = params.get("query");
-    const category = params.get("category");
-    const filter = params.get("filter");
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3001/api/menu/${
-            page && parseInt(page) - 1
-          }?count=${perPage}&category=${category}&filter=${filter}&${
-            query ? `query=${query.trim().toLowerCase()}` : ""
-          }`
-        );
-        if (!response.ok) {
-          throw new Error("Sorry we are facing an error please try again.");
-        }
-        if (response.ok) {
-          const res = await response.json();
-          setData(res);
-        }
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    if (page) {
-      fetchData();
-    }
-  }, [params]);
+  const page = params.get("page");
+  const query = params.get("query")?.trim().toLowerCase();
+  const category = params.get("category");
+  const filter = params.get("filter");
+  const { data, error, loading } = useFetchedData<{
+    items: MenuItem[];
+    totalPages: number;
+  }>(
+    `http://localhost:3001/api/menu/${
+      page && parseInt(page) - 1
+    }?count=${perPage}&category=${category}&filter=${filter}&${
+      query ? `query=${query}` : ""
+    }`
+  );
+
   if (loading)
     return (
       <ul className="w-full py-20 flex flex-col gap-8 ">
@@ -58,18 +36,13 @@ export default function Menu() {
   if (error) {
     return (
       <section className="w-full h-80 flex flex-col justify-center items-center gap-12">
-        <h2 className="text-2xl">
+        <h3 className="text-2xl">
           {String(error).includes("NetworkError")
             ? "Network Error please try again"
             : "Sorry we are facing an error please try again."}
-        </h2>
+        </h3>
 
-        <Button
-          onClick={() => {
-            refresh();
-          }}
-          variant="secondary"
-        >
+        <Button onClick={refresh} variant="secondary">
           Refresh
         </Button>
       </section>
