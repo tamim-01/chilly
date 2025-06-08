@@ -12,8 +12,8 @@ describe("getTranslation", () => {
   });
   it("replaces variable placeholders", () => {
     const variables = {
-      en: { company: "HOT CHILLY" },
-      fa: { company: "Tesla" },
+      en: { restaurant: "HOT CHILLY" },
+      fa: { restaurant: "Tesla" },
     };
     const tFa = getTranslation("fa", variables);
     expect(tFa("menu.title.one")).toBe("Tesla");
@@ -23,6 +23,14 @@ describe("getTranslation", () => {
   });
   it("does not replace if variable not provided", () => {
     const t = getTranslation("en");
-    expect(t("menu.title.one")).toBe("[company] !!!");
+    expect(t("menu.title.one")).toBe("[restaurant] !!!");
+  });
+  it("should handle missing variable values for a given locale", () => {
+    const variables = {
+      en: { restaurant: "Hot Chilly" },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
+    const t = getTranslation("fa", variables);
+    expect(t("menu.title.one")).toBe("[restaurant]");
   });
 });

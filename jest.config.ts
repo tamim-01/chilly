@@ -15,5 +15,6 @@ const config: Config = {
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "<rootDir>/__mocks__/mockStyle.js",
   },
+  testPathIgnorePatterns: ["/node_modules/", "/e2e/"],
 };
 export default createJestConfig(config);
