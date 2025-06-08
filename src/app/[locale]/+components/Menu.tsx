@@ -19,7 +19,7 @@ export default function Menu() {
     totalPages: number;
   }>(
     `http://localhost:3001/api/menu/${
-      page && parseInt(page) - 1
+      page && parseInt(page)
     }?count=${perPage}&category=${category}&filter=${filter}&${
       query ? `query=${query}` : ""
     }`
