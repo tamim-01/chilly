@@ -36,7 +36,13 @@ function getTranslation(
       .map((c) => {
         const variable = c.match(/^\[(\D+)\]$/);
         if (variable && variables) {
-          return c.replace(/^\[(\D+)\]$/, variables[locale][variable[1]]);
+          let res;
+          if (variables[locale] && variables[locale][variable[1]]) {
+            res = c.replace(/^\[(\D+)\]$/, variables[locale][variable[1]]);
+          } else {
+            return c;
+          }
+          return res;
         }
         return c;
       })
