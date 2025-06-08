@@ -1,6 +1,6 @@
 import Skeleton from "@/components/UI/skeleton";
 
-export default function MenuItem() {
+export default function MenuItemSkeleton() {
   return (
     <li className="flex flex-row md:gap-20 gap-3 py-8 border-b-1 border-gray-600 transition-all duration-500">
       <div className=" md:w-[262px] md:h-[262px] w-[172px] h-[172px] rounded-3xl overflow-hidden">
