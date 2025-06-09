@@ -21,7 +21,7 @@ export default function Menu() {
   const { data, error, loading } = useFetchedData<{
     items: MenuItem[];
     totalPages: number;
-  }>(`http://localhost:3001/api/menu/${page}?${urlParams}`);
+  }>(`api/menu/${page}?${urlParams}`);
 
   if (loading)
     return (
@@ -47,7 +47,7 @@ export default function Menu() {
     );
   }
 
-  if (data && data.items.length === 0) {
+  if (data?.items.length === 0) {
     return (
       <section className="w-full h-80 flex justify-center items-center">
         <h2 className="md:text-2xl text-xl ">
@@ -56,7 +56,6 @@ export default function Menu() {
       </section>
     );
   }
-
   return (
     <>
       <ul className="w-full py-20 flex flex-col gap-8 ">
@@ -67,7 +66,11 @@ export default function Menu() {
             })
             .map((item) => <MenuItem key={item.id} item={item} />)}
       </ul>
-      {data?.totalPages ? <Pagination pageCount={data?.totalPages} /> : <></>}
+      {data?.totalPages ? (
+        <Pagination pageCount={data?.totalPages + 1} />
+      ) : (
+        <></>
+      )}
     </>
   );
 }

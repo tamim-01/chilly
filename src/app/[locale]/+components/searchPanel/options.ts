@@ -13,6 +13,10 @@ export const OPTIONS = {
         label: "Pizza",
         value: "pizza",
       },
+      {
+        label: "Salad",
+        value: "salad",
+      },
     ],
     fa: [
       {
@@ -26,6 +30,10 @@ export const OPTIONS = {
       {
         label: "پیتزا",
         value: "pizza",
+      },
+      {
+        label: "سالاد",
+        value: "salad",
       },
     ],
   },
