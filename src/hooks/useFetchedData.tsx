@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+const baseUrl = "http://localhost:3001/";
 export default function useFetchedData<T>(url: string) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
@@ -7,7 +8,7 @@ export default function useFetchedData<T>(url: string) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(`${baseUrl}${url}`);
         const json = await response.json();
         setData(json);
       } catch (error) {
