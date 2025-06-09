@@ -44,7 +44,7 @@ export function Pagination({ pageCount }: Readonly<PaginationProps>) {
     params.set("page", pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
-  if (pageCount > 1) {
+  if (pageCount !== 0) {
     return (
       <div className="flex flex-row items-center justify-center py-8">
         <PaginationArrow
