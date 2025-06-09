@@ -97,7 +97,7 @@ const Select = ({
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (!isOpen) {
       if (e.key === "ArrowDown" || e.key === "Enter") {
         setIsOpen(true);
@@ -148,7 +148,7 @@ const Select = ({
   `;
 
   const triggerStyles = `
-    border rounded-[16px] md:px-6 px-3 py-3 transition flex flex-row justify-between gap-6 items-center 
+    border w-full rounded-[16px] md:px-6 px-3 py-3 transition flex flex-row justify-between gap-6 items-center 
     ${disabled ? "bg-muted text-muted-foreground cursor-not-allowed" : ""}
     ${
       variant === "ghost"
@@ -246,14 +246,14 @@ const Select = ({
         </label>
       )}
 
-      <div
+      <button
         tabIndex={0}
         className={triggerStyles}
         onClick={() => !disabled && setIsOpen((prev) => !prev)}
         onKeyDown={handleKeyDown}
       >
         {renderSelected()}
-      </div>
+      </button>
 
       {isOpen && (
         <ul className="absolute z-50 mt-1 w-full bg-secondary border border-input rounded-[16px] shadow-md max-h-60 overflow-auto">
