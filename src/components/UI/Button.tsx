@@ -6,7 +6,7 @@ const variants = {
   secondary: "  border-foreground hover:bg-secondary text-foreground",
   disabled:
     " border-muted  opacity-50 cursor-not-allowed text-muted-foreground ",
-  ghost: "  border-none  hover:bg-secondary  text-primary",
+  ghost: "  border-none  hover:bg-secondary  text-foreground",
   destructive: " bg-red-600 hover:brightness-140 border-none text-white ",
   danger:
     "  border-red-600 hover:bg-red-100 text-red-600 dark:hover:bg-red-900",
