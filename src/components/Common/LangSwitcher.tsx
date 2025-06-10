@@ -13,6 +13,7 @@ export default function LangSwitcher() {
     <div className="w-24 md:w-32" data-testid="lang-select">
       <Select
         fullWidth
+        placeholder="select"
         onChange={(val) => {
           if (typeof val === "string") {
             document.cookie = `locale=${val}; path=/; max-age=31536000`;
