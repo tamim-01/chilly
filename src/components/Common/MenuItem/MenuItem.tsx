@@ -39,7 +39,11 @@ export default function MenuItem({ item }: { item: MenuItem }) {
           </span>
           {offer && <span>{payment_type.afterDiscount}$</span>}
         </h2>
-        <p className={`md:text-2xl mb-3 text-base ${!open && "line-clamp-4"}`}>
+        <p
+          className={`md:text-2xl mb-3 text-base text-justify ${
+            !open && "line-clamp-4"
+          }`}
+        >
           {description}
         </p>
         {spicy && <Badge size="lg">Spicy</Badge>}
