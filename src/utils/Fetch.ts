@@ -22,7 +22,6 @@ async function request(
       options.body = JSON.stringify(params);
     }
   }
-  console.log("base + url, options => ", base + url, options);
   const response = await fetch(base + url, options);
   const result = await response.json();
   if (response.ok) {
