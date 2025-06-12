@@ -3,11 +3,13 @@ import Button from "@/components/UI/Button";
 import TextInput from "@/components/UI/inputs/TextInput";
 import Fetch from "@/utils/Fetch";
 import { useToast } from "@/utils/useToast";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const r = useRouter();
   return (
     <>
       <form
@@ -23,22 +25,25 @@ export default function Login() {
               const res = await Fetch.post({
                 url: "/signin",
                 params: { username, password },
-              }).then((res) => {
+              });
+              if (res.status === "success") {
                 setLoading(false);
-                return res;
-              });
-              toast({
-                message: res.message,
-                type: "success",
-                position: "top-right",
-              });
+                toast({
+                  message: res.result.message,
+                  type: "success",
+                  position: "top-right",
+                });
+                r.push("/dash");
+              } else {
+                toast({
+                  message: "user name or password incorrect",
+                  type: "error",
+                  position: "top-right",
+                });
+              }
+              setLoading(false);
             } catch (err) {
               console.log(err);
-              toast({
-                message: "user name or password incorrect",
-                type: "error",
-                position: "top-right",
-              });
               setLoading(false);
             }
           }

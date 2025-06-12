@@ -25,9 +25,9 @@ async function request(
   const response = await fetch(base + url, options);
   const result = await response.json();
   if (response.ok) {
-    return result;
+    return { status: "success", result };
   } else {
-    throw new Error(result.message);
+    return { status: "error", result: result.message };
   }
 }
 
