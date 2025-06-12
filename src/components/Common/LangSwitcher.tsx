@@ -6,7 +6,9 @@ import Select from "../UI/inputs/Select";
 export default function LangSwitcher() {
   const router = useRouter();
   const pathName = usePathname();
-  const langFromUrl = pathName.split("/")[1];
+  const langFromUrl = pathName.startsWith("/dash")
+    ? pathName.split("/")[2]
+    : pathName.split("/")[1];
   const lang = langFromUrl || "en";
 
   return (
