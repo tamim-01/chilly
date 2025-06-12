@@ -11,5 +11,17 @@
     "filter": {
       "label": "فیلتر"
     }
+  },
+  "login": {
+    "title": "ورود به داشبورد",
+    "username_input": {
+      "label": "نام کاربری",
+      "placeholder": "نام کاربری خود را وارد کنید..."
+    },
+    "password_input": {
+      "label": "رمز عبور",
+      "placeholder": "رمز عبور خود را وارد کنید..."
+    },
+    "button": "تایید"
   }
 }

@@ -11,5 +11,17 @@
     "filter": {
       "label": "Filter"
     }
+  },
+  "login": {
+    "title": "Hot chilly dashboard",
+    "username_input": {
+      "label": "username",
+      "placeholder": "Enter your username..."
+    },
+    "password_input": {
+      "label": "password",
+      "placeholder": "Enter your password..."
+    },
+    "button": "Confirm"
   }
 }

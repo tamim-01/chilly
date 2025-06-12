@@ -10,9 +10,5 @@ export async function middleware(request: NextRequest) {
     const lang = cookie.get("locale")?.value || defaultLang;
     return NextResponse.redirect(new URL(`/${lang}`, request.url), 307);
   }
-  if (pathname === "/dash") {
-    const lang = cookie.get("locale")?.value || defaultLang;
-    return NextResponse.redirect(new URL(`/dash/${lang}`, request.url), 307);
-  }
   return NextResponse.next();
 }
