@@ -1,4 +1,7 @@
 import { TLanguages } from "@/utils/getTranslation";
+import { SearchPanel } from "../../../components/Common/searchPanel/SearchPanel";
+import NavPanel from "./+components/NavPanel/NavPanel";
+import Menu from "./+components/Menu";
 
 interface PageProps {
   params: Promise<{
@@ -7,10 +10,11 @@ interface PageProps {
 }
 export default async function Home({ params }: PageProps) {
   const { locale } = await params;
-  console.log("locale => ", locale);
   return (
     <>
-      <p>dash</p>
+      <NavPanel />
+      <SearchPanel locale={locale} />
+      <Menu />
     </>
   );
 }

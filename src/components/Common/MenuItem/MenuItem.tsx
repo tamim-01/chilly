@@ -8,7 +8,7 @@ export default function MenuItem({ item }: { item: MenuItem }) {
   const { title, payment_type, image_urls, description, spicy } = item;
   const offer = payment_type.discount && payment_type.afterDiscount;
   return (
-    <li
+    <article
       className=" cursor-pointer border-b-1 border-gray-600 transition-all duration-500"
       onClick={() => {
         setOpen(!open);
@@ -41,7 +41,7 @@ export default function MenuItem({ item }: { item: MenuItem }) {
         </h2>
         <p
           className={`md:text-2xl mb-3 text-base text-justify ${
-            !open && "line-clamp-4"
+            !open && ` ${spicy ? "line-clamp-3" : "line-clamp-4"} `
           }`}
         >
           {description}
@@ -88,6 +88,6 @@ export default function MenuItem({ item }: { item: MenuItem }) {
           alt="open/close"
         />
       </button>
-    </li>
+    </article>
   );
 }

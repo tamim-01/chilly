@@ -3,8 +3,9 @@ import MenuItem from "@/components/Common/MenuItem/MenuItem";
 import MenuItemSkeleton from "@/components/Common/MenuItem/MenuItemSkeleton";
 import Button from "@/components/UI/Button";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Pagination } from "./Pagination";
+import { Pagination } from "@/app/[locale]/+components/Pagination";
 import useFetchedData from "@/hooks/useFetchedData";
+import AddNew from "@/components/Common/AddNew";
 
 export default function Menu() {
   const params = useSearchParams();
@@ -58,7 +59,8 @@ export default function Menu() {
   }
   return (
     <>
-      <ul className="w-full py-20 flex flex-col gap-8 ">
+      <AddNew />
+      <ul className="w-full py-6 md:py-16 flex flex-col gap-8 ">
         {data &&
           data.items
             .sort(function (a, b) {

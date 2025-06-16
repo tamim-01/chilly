@@ -68,7 +68,12 @@ export default function Login({ locale }: { locale: TLanguages }) {
           type="password"
           inputSize="lg"
         />
-        <Button type="submit" variant="secondary" loading={loading}>
+        <Button
+          type="submit"
+          className="rounded-xl"
+          variant="secondary"
+          loading={loading}
+        >
           {t("login.button")}
         </Button>
       </form>

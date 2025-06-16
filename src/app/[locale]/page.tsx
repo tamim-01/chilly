@@ -1,5 +1,5 @@
 import Hero from "@/app/[locale]/+components/Hero";
-import { SearchPanel } from "@/app/[locale]/+components/searchPanel/SearchPanel";
+import { SearchPanel } from "@/components/Common/searchPanel/SearchPanel";
 import { TLanguages } from "@/utils/getTranslation";
 import Menu from "./+components/Menu";
 

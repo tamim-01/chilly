@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { OPTIONS } from "./options";
 import { variables } from "@/locales/variables";
 import getTranslation, { TLanguages } from "@/utils/getTranslation";
-import TextInput from "../../../../components/UI/inputs/TextInput";
+import TextInput from "@/components/UI/inputs/TextInput";
 import Select from "@/components/UI/inputs/Select";
 import useSetParams from "@/hooks/useSetParams";
 import useInitializeParams from "@/hooks/useInitializeParams";
 import useDebouncedCallback from "@/hooks/useDebouncedCallback";
 import Image from "next/image";
-import search from "../../../../../public/icon/search.svg";
+import search from "../../../../public/icon/search.svg";
 
 export function SearchPanel({ locale }: { locale: TLanguages }) {
   const [query, setQuery] = useState<null | string>(null);

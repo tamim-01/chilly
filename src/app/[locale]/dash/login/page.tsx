@@ -1,5 +1,5 @@
 import { TLanguages } from "@/utils/getTranslation";
-import Login from "./+components/login";
+import Login from "../+components/login";
 interface PageProps {
   params: Promise<{
     locale: TLanguages;
