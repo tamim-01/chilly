@@ -3,7 +3,8 @@ import LoadingSpinner from "./Spinner";
 
 const variants = {
   primary: " bg-primary hover:brightness-120 border-none  text-white",
-  secondary: "  border-foreground hover:bg-secondary text-foreground",
+  secondary:
+    "  border-foreground bg-secondary hover:bg-primary text-foreground border-[1px]",
   disabled:
     " border-muted  opacity-50 cursor-not-allowed text-muted-foreground ",
   ghost: "  border-none  hover:bg-secondary  text-foreground",
@@ -46,7 +47,7 @@ const Button = ({
       type={type}
       disabled={disabled || loading}
       onClick={onClick}
-      className={`relative flex min-h-10 justify-center items-center transition-all gap-2  border-[2px] rounded-lg  ${
+      className={`relative flex min-h-10 justify-center items-center transition-all gap-2 cursor-pointer ${
         variants[variant]
       } ${sizes[size]} ${className} ${
         disabled || loading ? " " : "active:scale-[0.85]  duration-200"

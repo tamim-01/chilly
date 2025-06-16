@@ -149,11 +149,15 @@ const Select = ({
 
   const triggerStyles = `
     border w-full rounded-[16px] md:px-6 px-3 py-3 transition flex flex-row justify-between gap-6 items-center 
-    ${disabled ? "bg-muted text-muted-foreground cursor-not-allowed" : ""}
+    ${
+      disabled
+        ? "bg-muted text-muted-foreground cursor-not-allowed"
+        : "cursor-pointer"
+    }
     ${
       variant === "ghost"
         ? "bg-transparent border-transparent"
-        : "bg-secondary border-input"
+        : "bg-secondary border-foreground hover:bg-primary"
     }
     ${error ? "border-red-500" : ""}
   `;
@@ -185,7 +189,7 @@ const Select = ({
                       handleSelect(option);
                     }
                   }}
-                  className="ml-1  text-white text-xl hover:text-red-300 focus:outline-none"
+                  className="ml-1  text-white text-xl hover:text-red-300 focus:outline-none cursor-pointer"
                 >
                   x
                 </button>
