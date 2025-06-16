@@ -3,7 +3,7 @@ import Button from "@/components/UI/Button";
 import TextInput from "@/components/UI/inputs/TextInput";
 import Fetch from "@/utils/Fetch";
 import getTranslation, { TLanguages } from "@/utils/getTranslation";
-import { useToast } from "@/utils/useToast";
+import { useToast } from "@/hooks/useToast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
