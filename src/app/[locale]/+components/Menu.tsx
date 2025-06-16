@@ -64,7 +64,11 @@ export default function Menu() {
             .sort(function (a, b) {
               return a.id - b.id;
             })
-            .map((item) => <MenuItem key={item.id} item={item} />)}
+            .map((item) => (
+              <li key={item.id}>
+                <MenuItem item={item} />
+              </li>
+            ))}
       </ul>
       {data?.totalPages ? (
         <Pagination pageCount={data?.totalPages + 1} />
