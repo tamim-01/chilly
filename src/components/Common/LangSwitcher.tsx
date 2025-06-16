@@ -12,7 +12,10 @@ export default function LangSwitcher() {
   const lang = langFromUrl || "en";
 
   return (
-    <div className="w-24 md:w-32" data-testid="lang-select">
+    <div
+      className="w-24 md:w-32 cursor-pointer ml-auto"
+      data-testid="lang-select"
+    >
       <Select
         fullWidth
         placeholder="select"
