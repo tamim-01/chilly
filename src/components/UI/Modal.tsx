@@ -23,7 +23,7 @@ const sizeClasses = {
 };
 
 const variantClasses = {
-  default: "bg-background text-primary-foreground",
+  default: "bg-primary text-primary-foreground",
   danger: "bg-red-50 text-red-900",
   ghost: "bg-transparent shadow-none",
 };
@@ -102,7 +102,7 @@ const Modal = ({
                 className={`${
                   variant === "danger"
                     ? "bg-red-400 hover:bg-red-500"
-                    : "bg-secondary hover:bg-primary"
+                    : "bg-primary hover:bg-primary"
                 } px-[6px] pt-0.5 text-center   rounded-full  text-background  text-sm `}
               >
                 X
