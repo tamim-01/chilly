@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Pagination } from "@/app/[locale]/+components/Pagination";
 import useFetchedData from "@/hooks/useFetchedData";
 import AddNew from "@/components/Common/AddNew";
+import MenuItemOptions from "@/components/Common/MenuItem/MenuItemOptions";
 
 export default function Menu() {
   const params = useSearchParams();
@@ -68,6 +69,7 @@ export default function Menu() {
             })
             .map((item) => (
               <li key={item.id}>
+                <MenuItemOptions id={item.id} />
                 <MenuItem item={item} />
               </li>
             ))}
