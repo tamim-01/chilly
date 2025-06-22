@@ -4,7 +4,7 @@ export const variants = {
     default:
       "border border-foreground rounded-[16px] bg-secondary hover:bg-primary focus:outline-primary focus:outline-2 placeholder:text-primary-foreground",
     error:
-      "border-3 border-red-500 rounded-[16px] hover:bg-red-100 opacity-75 focus:outline-red-500 focus:outline-2 placeholder:text-red-400",
+      "border-3 border-red-500 rounded-[16px] bg-secondary hover:bg-primary opacity-75 focus:outline-red-500 focus:outline-2 placeholder:text-red-400",
     disabled:
       "border-3 border-gray-300 rounded-[16px] bg-muted text-muted-foreground cursor-not-allowed placeholder:text-muted-foreground",
   },
@@ -79,9 +79,8 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       inputSize = "md",
       fullWidth = false,
       type = "text",
-      placeholder,
       id,
-      ...props
+      ...rest
     },
     ref
   ) => {
@@ -130,12 +129,9 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           )}
           <input
             type={type}
-            placeholder={placeholder}
             ref={ref}
-            id={id}
-            disabled={disabled}
             className={`transition-all  ${inputClass}`}
-            {...props}
+            {...rest}
           />
           {icon && iconPosition === "right" && (
             <div className="absolute right-3 top-1/2 -translate-y-1/2">
