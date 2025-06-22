@@ -14,7 +14,7 @@ export default async function Home({ params }: PageProps) {
     <>
       <NavPanel />
       <SearchPanel locale={locale} />
-      <Menu />
+      <Menu locale={locale} />
     </>
   );
 }
