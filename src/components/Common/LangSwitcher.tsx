@@ -13,7 +13,9 @@ export default function LangSwitcher() {
 
   return (
     <div
-      className="w-24 md:w-32 cursor-pointer ml-auto"
+      className={`w-24 md:w-32 cursor-pointer ${
+        lang === "fa" ? "mr-auto" : "ml-auto"
+      }`}
       data-testid="lang-select"
     >
       <Select
