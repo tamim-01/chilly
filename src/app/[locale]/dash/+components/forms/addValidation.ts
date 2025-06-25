@@ -1,9 +1,8 @@
 import { z } from "zod";
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024;
-
 export const schema = z.object({
-  name: z.string().min(3, "Food name Must have at least 3 character"),
+  title: z.string().min(3, "Food name Must have at least 3 character"),
   spicy: z.boolean(),
   images: z
     .instanceof(Array<File>)
@@ -18,5 +17,14 @@ export const schema = z.object({
         message: "File size should not exceed 50MB",
       }
     ),
+  price: z
+    .object({
+      value: z.number().int("enter a valid price").min(1, "price is required"),
+      discount: z.number().int("enter a valid percentage"),
+    })
+    .required(),
+  category: z.enum(["burger", "pizza", "salad"], {
+    errorMap: () => ({ message: "You have to select a gender option" }),
+  }),
 });
 export type ADD_SCHEMA = z.infer<typeof schema>;
