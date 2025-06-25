@@ -251,6 +251,7 @@ const Select = ({
       )}
 
       <button
+        type="button"
         tabIndex={0}
         className={triggerStyles}
         onClick={() => !disabled && setIsOpen((prev) => !prev)}

@@ -129,12 +129,15 @@ const FileInput = ({
 
       <div className={`flex flex-col gap-1 ${fullWidth ? "w-full" : ""}`}>
         {label && (
-          <label htmlFor={inputId} className={`${labelColor}`}>
+          <label
+            htmlFor={inputId}
+            className={`${labelColor} pb-1.5 text-[18px]`}
+          >
             {label}
           </label>
         )}
         <div
-          className={`text-sm flex flex-row flex-wrap items-center gap-1.5 font-medium  transition-all duration-200 ${baseClasses}`}
+          className={`text-sm flex flex-row items-center gap-1.5 font-medium  transition-all duration-200 overflow-auto ${baseClasses}`}
         >
           <Button
             size="sm"

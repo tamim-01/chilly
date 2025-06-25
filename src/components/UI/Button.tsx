@@ -10,7 +10,7 @@ const variants = {
   ghost: "  border-none  hover:bg-secondary  text-foreground",
   destructive: " bg-red-600 hover:brightness-140 border-none text-white ",
   danger:
-    "  border-red-600 hover:bg-red-100 text-red-600 dark:hover:bg-red-900",
+    " border-1 border-foreground bg-secondary hover:bg-red-100 text-red-600 dark:hover:bg-red-900",
   warning:
     "  border-yellow-600 hover:bg-yellow-100 text-yellow-600 dark:hover:bg-yellow-900",
   info: " bg-secondary hover:brightness-120 border-none  text-primary",
