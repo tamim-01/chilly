@@ -4,9 +4,9 @@ export const variants = {
     default:
       "border border-foreground rounded-[16px] bg-secondary hover:bg-primary focus:outline-primary focus:outline-2 placeholder:text-primary-foreground",
     error:
-      "border-3 border-red-500 rounded-[16px] bg-secondary hover:bg-primary opacity-75 focus:outline-red-500 focus:outline-2 placeholder:text-red-400",
+      "border-2 border-red-500 rounded-[16px] bg-secondary hover:bg-primary opacity-75 focus:outline-red-500 focus:outline-2 placeholder:text-red-400",
     disabled:
-      "border-3 border-gray-300 rounded-[16px] bg-muted text-muted-foreground cursor-not-allowed placeholder:text-muted-foreground",
+      "border border-foreground rounded-[16px] bg-muted text-muted-foreground cursor-not-allowed placeholder:text-muted-foreground",
   },
   ghost: {
     default:
@@ -33,6 +33,7 @@ export const sizes = {
 };
 
 interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
@@ -43,7 +44,6 @@ interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   fullWidth?: boolean;
   value?: string | number | readonly string[];
   defaultValue?: string | number | readonly string[];
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   type?:
     | "text"
@@ -68,6 +68,7 @@ interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
+      onChange,
       className = "",
       label,
       icon,
@@ -115,21 +116,23 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     `;
 
     return (
-      <div className={`flex flex-col ${fullWidth ? "w-full" : ""}`}>
+      <div className={`flex flex-col ${fullWidth ? "w-full" : "w-fit"}`}>
         {label && (
           <label htmlFor={id} className={labelClass}>
             {label}
           </label>
         )}
-        <div className="relative">
+        <div className={`relative ${fullWidth ? "w-full" : "w-fit"}`}>
           {icon && iconPosition === "left" && (
             <div className="absolute left-3 top-1/2 -translate-y-1/2">
               {icon}
             </div>
           )}
           <input
+            onChange={onChange}
             type={type}
             ref={ref}
+            disabled={disabled}
             className={`transition-all  ${inputClass}`}
             {...rest}
           />
