@@ -17,7 +17,8 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const checkboxVariants = {
   default: {
-    default: "border-2 border-primary text-primary focus:ring-primary",
+    default:
+      "border-2 border-primary text-primary focus:ring-primary cursor-pointer",
     error: "border-2 border-red-500 text-red-500 focus:ring-red-500",
     disabled:
       "border-2 border-gray-300 text-muted-foreground cursor-not-allowed",
@@ -72,15 +73,16 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             type="checkbox"
             id={inputId}
             name={name}
+            disabled={disabled}
             onChange={onChange}
             ref={ref}
-            className={`${variantClass} ${sizeClass} cursor-pointer`}
+            className={`${variantClass} ${sizeClass} `}
             {...rest}
           />
           {label && (
             <label
               htmlFor={inputId}
-              className={`cursor-pointer ${
+              className={` ${
                 disabled ? "text-muted-foreground" : "text-primary-foreground"
               }`}
             >
