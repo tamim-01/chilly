@@ -102,7 +102,7 @@ export default function AddForm() {
           />
         </div>
       </div>
-      <div className="flex flex-row fixed bottom-1 left-4 md:left-72 md:bottom-12">
+      <div className="flex flex-row fixed bottom-1 left-4 md:static">
         <Button variant="danger" className="rounded-full mr-2" type="button">
           X
         </Button>
