@@ -75,7 +75,11 @@ export default function Menu({ locale }: { locale: TLanguages }) {
               </li>
             ))}
       </ul>
-      {data?.totalPages ? <Pagination pageCount={data?.totalPages} /> : <></>}
+      {data?.totalPages ? (
+        <Pagination pageCount={data?.totalPages + 1} />
+      ) : (
+        <></>
+      )}
     </>
   );
 }
