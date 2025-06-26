@@ -70,11 +70,7 @@ export default function Menu() {
               </li>
             ))}
       </ul>
-      {data?.totalPages ? (
-        <Pagination pageCount={data?.totalPages + 1} />
-      ) : (
-        <></>
-      )}
+      {data?.totalPages ? <Pagination pageCount={data?.totalPages} /> : <></>}
     </>
   );
 }
