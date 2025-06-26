@@ -24,7 +24,7 @@ export const schema = z.object({
     })
     .required(),
   category: z.enum(["burger", "pizza", "salad"], {
-    errorMap: () => ({ message: "You have to select an option" }),
+    errorMap: () => ({ message: "You have to select a gender option" }),
   }),
 });
 export type ADD_SCHEMA = z.infer<typeof schema>;
