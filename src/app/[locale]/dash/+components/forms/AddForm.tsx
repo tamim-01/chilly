@@ -11,6 +11,8 @@ import Select from "@/components/UI/inputs/Select";
 import { OPTIONS } from "@/components/Common/searchPanel/options";
 import { usePathname } from "next/navigation";
 import { TLanguages } from "@/utils/getTranslation";
+import DependencyField from "./DependencyField";
+import Textarea from "@/components/UI/inputs/Textarea";
 
 export default function AddForm() {
   const locale = usePathname().split("/")[1] as TLanguages;
@@ -23,23 +25,43 @@ export default function AddForm() {
   } = useForm<ADD_SCHEMA>({
     resolver: zodResolver(schema),
     mode: "onBlur",
-    defaultValues: {
-      title: "",
-      spicy: false,
-    },
   });
 
   const onSubmit: SubmitHandler<ADD_SCHEMA> = (data) => {
-    console.log(data);
+    const { dependencies, images, ...rest } = data;
+    const admin_id = localStorage.getItem("id");
+    if (admin_id) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const item: Record<string, any> = rest;
+      console.log("dependencies => ", dependencies);
+      const formData = new FormData();
+      formData.append("admin_id", JSON.stringify(admin_id));
+      for (const key in rest) {
+        if (Array.isArray(item[key])) {
+          item[key].forEach((value) => formData.append(key, value));
+        } else {
+          formData.append(key, JSON.stringify(item[key]));
+        }
+      }
+      images.forEach((file) => {
+        formData.append("images", file);
+      });
+      console.log("formData => ", formData);
+      fetch("http://localhost:3001/api/menu", {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
+    }
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6 w-full py-16"
+      className="flex flex-col gap-6  py-12 md:mx-auto"
     >
-      <div className="flex md:flex-row flex-col gap-16 justify-center">
-        <div className="flex flex-col gap-8 max-w-[354px] w-full">
+      <section className="flex md:flex-row flex-col gap-16 ">
+        <div className="flex flex-col gap-8 max-w-[354px] ">
           <div className="flex flex-row gap-3.5 items-center ">
             <TextInput
               {...register("title")}
@@ -56,7 +78,12 @@ export default function AddForm() {
               className="mt-9 text-nowrap"
             />
           </div>
-
+          <Checkbox
+            {...register("active")}
+            label="visible ? "
+            inputSize="lg"
+            className="mt-4 text-nowrap"
+          />
           <Controller
             name="category"
             control={control}
@@ -73,7 +100,6 @@ export default function AddForm() {
               />
             )}
           />
-
           <Controller
             control={control}
             name="images"
@@ -92,24 +118,41 @@ export default function AddForm() {
             )}
           />
         </div>
-        <div className="flex flex-col gap-8 max-w-[354px] w-full">
-          <Controller
-            control={control}
-            name="price"
-            render={({ field: { onChange } }) => (
-              <PriceField onChange={onChange} error={errors.price} />
-            )}
-          />
-        </div>
-      </div>
-      <div className="flex flex-row fixed bottom-1 left-4 md:static">
-        <Button variant="danger" className="rounded-full mr-2" type="button">
-          X
+
+        <Controller
+          control={control}
+          name="payment_type"
+          render={({ field: { onChange } }) => (
+            <PriceField onChange={onChange} error={errors.payment_type} />
+          )}
+        />
+      </section>
+      <Controller
+        control={control}
+        name="dependencies"
+        render={({ field: { onChange } }) => (
+          <DependencyField onChange={onChange} error={errors.dependencies} />
+        )}
+      />
+      <section>
+        <Textarea
+          error={errors.description?.message ? true : false}
+          errorMessage={errors.description?.message}
+          {...register("description")}
+          label="Description"
+          fullWidth
+          resize="vertical"
+          placeholder="Write a brief description about the food and its ingredients..."
+        />
+      </section>
+      <section className="flex flex-row fixed bottom-1 left-4 md:static">
+        <Button variant="danger" className="rounded-xl mr-2" type="button">
+          cancel
         </Button>
         <Button variant="secondary" className="rounded-xl" type="submit">
           Confirm
         </Button>
-      </div>
+      </section>
     </form>
   );
 }

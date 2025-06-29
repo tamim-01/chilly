@@ -21,6 +21,7 @@ export default function DashLayout({ children }: LayoutProps) {
           if (res.status === "success") {
             localStorage.setItem("user", res.result.username);
             localStorage.setItem("role", res.result.role);
+            localStorage.setItem("id", res.result.id);
             if (path.includes("/dash/login")) {
               r.push(`http://localhost:3000/${locale}/dash`);
             }

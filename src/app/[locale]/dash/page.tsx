@@ -2,6 +2,7 @@ import { TLanguages } from "@/utils/getTranslation";
 import { SearchPanel } from "../../../components/Common/searchPanel/SearchPanel";
 import NavPanel from "./+components/NavPanel/NavPanel";
 import Menu from "./+components/Menu";
+import AddNew from "@/components/Common/AddNew";
 
 interface PageProps {
   params: Promise<{
@@ -14,7 +15,8 @@ export default async function Home({ params }: PageProps) {
     <>
       <NavPanel />
       <SearchPanel locale={locale} />
-      <Menu locale={locale} />
+      <AddNew locale={locale} />
+      <Menu />
     </>
   );
 }

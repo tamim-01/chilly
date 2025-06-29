@@ -38,7 +38,7 @@ export default function PriceField({
   }, [discount]);
 
   return (
-    <>
+    <div className="flex flex-col gap-8 max-w-[354px] w-full">
       <div className="flex flex-row gap-3.5 items-center">
         <TextInput
           onChange={priceChangeHandler}
@@ -106,6 +106,6 @@ export default function PriceField({
           placeholder="price after discount"
         />
       </div>
-    </>
+    </div>
   );
 }
