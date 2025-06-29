@@ -4,7 +4,7 @@ export const variants = {
     default:
       "border border-foreground rounded-[16px] bg-secondary hover:bg-primary focus:outline-primary focus:outline-2 placeholder:text-primary-foreground",
     error:
-      "border-2 border-red-500 rounded-[16px] bg-secondary hover:bg-primary opacity-75 focus:outline-red-500 focus:outline-2 placeholder:text-red-400",
+      "border-2 border-red-500 rounded-[16px] bg-secondary hover:bg-primary opacity-75 focus:outline-red-500 focus:outline-2 ",
     disabled:
       "border border-foreground rounded-[16px] bg-muted text-muted-foreground cursor-not-allowed placeholder:text-muted-foreground",
   },
@@ -91,9 +91,9 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
     const inputPadding =
       icon && iconPosition === "left"
-        ? "pl-10"
+        ? "pl-14"
         : icon && iconPosition === "right"
-        ? "pr-10"
+        ? "pr-14"
         : "";
 
     const inputClass = `
@@ -133,7 +133,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             type={type}
             ref={ref}
             disabled={disabled}
-            className={`transition-all  ${inputClass}`}
+            className={`transition-all  ${inputClass} focus-visible:bg-primary`}
             {...rest}
           />
           {icon && iconPosition === "right" && (
@@ -143,7 +143,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           )}
         </div>
         {error && errorMessage && (
-          <p className=" text-red-500">{errorMessage}</p>
+          <p className="text-[18px] text-red-500">{errorMessage}</p>
         )}
       </div>
     );

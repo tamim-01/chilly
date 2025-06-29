@@ -51,7 +51,7 @@ const FileInput = ({
   const state = disabled ? "disabled" : error ? "error" : "default";
   const baseClasses = `${variants[variant][state]} ${sizes[inputSize]} ${
     fullWidth ? "w-full" : ""
-  } ${className}`;
+  } ${className} focus-visible:bg-primary`;
   const generatedId = useId();
   const inputId = id || generatedId;
   const labelColor = error
@@ -173,7 +173,9 @@ const FileInput = ({
                   </Badge>
                 ))
               ) : (
-                <p>Nothing selected yet...</p>
+                <p className="text-[#a5a5a8] text-base">
+                  Nothing selected yet...
+                </p>
               )}
             </>
           }
@@ -193,7 +195,7 @@ const FileInput = ({
         />
 
         {error && errorMessage && (
-          <p className="text-sm text-red-500">{errorMessage}</p>
+          <p className="text-[18px] text-red-500">{errorMessage}</p>
         )}
       </div>
     </>

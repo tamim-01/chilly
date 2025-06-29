@@ -171,28 +171,16 @@ const Select = ({
   const renderSelected = () => {
     if (multiple && Array.isArray(currentValue)) {
       if (currentValue.length === 0 && !searchable) {
-        return <span className="text-muted-foreground">{placeholder}</span>;
+        return <span className="text-[#a5a5a8] text-base">{placeholder}</span>;
       }
       return (
         <>
           {currentValue.map((val) => {
             const option = options.find((o) => o.value === val);
             return (
-              <span key={val} className="flex items-center gap-1">
+              <span key={val} className="flex items-center gap-1 ">
                 {option?.image ?? null}
                 {option?.label ?? val}
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (option) {
-                      handleSelect(option);
-                    }
-                  }}
-                  className="ml-1  text-white text-xl hover:text-red-300 focus:outline-none cursor-pointer"
-                >
-                  x
-                </button>
               </span>
             );
           })}
@@ -229,7 +217,7 @@ const Select = ({
               <span className="leading-normal">{selectedOption?.label}</span>
             </>
           ) : (
-            <span className="">{placeholder}</span>
+            <span className="text-[#a5a5a8] text-base">{placeholder}</span>
           )}
         </>
       );
@@ -245,7 +233,10 @@ const Select = ({
   return (
     <div className={containerStyles} ref={selectRef}>
       {label && (
-        <label htmlFor={id} className="block font-medium mb-1.5">
+        <label
+          htmlFor={id}
+          className={`block font-medium mb-1.5 ${error ? "text-red-500" : ""}`}
+        >
           {label}
         </label>
       )}
@@ -289,7 +280,7 @@ const Select = ({
       {description && !error && <p className="text-xs  mt-1">{description}</p>}
 
       {error && errorMessage && (
-        <p className="text-xs text-red-500 mt-1">{errorMessage}</p>
+        <p className="text-[18px] text-red-500 mt-1">{errorMessage}</p>
       )}
     </div>
   );
