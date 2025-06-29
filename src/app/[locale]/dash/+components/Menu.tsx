@@ -5,11 +5,9 @@ import Button from "@/components/UI/Button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Pagination } from "@/app/[locale]/+components/Pagination";
 import useFetchedData from "@/hooks/useFetchedData";
-import AddNew from "@/components/Common/AddNew";
 import MenuItemOptions from "@/components/Common/MenuItem/MenuItemOptions";
-import { TLanguages } from "@/utils/getTranslation";
 
-export default function Menu({ locale }: { locale: TLanguages }) {
+export default function Menu() {
   const params = useSearchParams();
   const { refresh } = useRouter();
   const page = params.get("page") ?? "1";
@@ -61,7 +59,6 @@ export default function Menu({ locale }: { locale: TLanguages }) {
   }
   return (
     <>
-      <AddNew locale={locale} />
       <ul className="w-full py-6 md:py-16 flex flex-col gap-8 ">
         {data &&
           data.items
