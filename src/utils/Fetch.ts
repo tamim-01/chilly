@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const base = process.env.API_URL;
 interface API_METHOD {
   url: string;
-  params?: Record<string, string | number>;
+  params?: any;
 }
 async function request(
   url: string,
-  params?: Record<string, string | number>,
+  params?: any,
   method: "GET" | "POST" | "DELETE" | "PUT" = "GET"
 ) {
   const options: { [k: string]: string | number | object } = {
@@ -31,7 +32,7 @@ async function request(
   }
 }
 
-function objectToQueryString(obj: Record<string, string | number>) {
+function objectToQueryString(obj: any) {
   return Object.keys(obj)
     .map((key) => key + "=" + obj[key])
     .join("&");
