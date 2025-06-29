@@ -9,7 +9,7 @@ interface MenuItem {
   payment_type: Price;
   description: string;
   spicy: boolean;
-  isActive: boolean;
+  active: boolean;
   image_urls: string[];
 }
 interface InventoryItem {
