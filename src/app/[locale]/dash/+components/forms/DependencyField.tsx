@@ -6,20 +6,27 @@ import TextInput from "@/components/UI/inputs/TextInput";
 import Skeleton from "@/components/UI/skeleton";
 import useFetchedData from "@/hooks/useFetchedData";
 import { useEffect, useState } from "react";
+import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
 
 export default function DependencyField({
   onChange,
   error,
 }: {
   onChange: React.Dispatch<
-    React.SetStateAction<Array<{ label: string; value: number }> | null>
+    React.SetStateAction<Array<{
+      label: string;
+      value: number;
+      id: number;
+    }> | null>
   >;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  error: any;
+
+  error:
+    | Merge<FieldError, FieldErrorsImpl<{ value: number; discount: number }>>
+    | undefined;
 }) {
   const { data, loading } = useFetchedData<InventoryItem[]>(`api/inventory`);
   const [selectedDep, setSelectedDep] = useState<
-    Array<{ label: string; value: number }>
+    Array<{ label: string; value: number; id: number }>
   >([]);
 
   const options = data?.map((i) => {
@@ -30,7 +37,16 @@ export default function DependencyField({
       selectedValues.forEach((selected) => {
         const isNew = !selectedDep.map((i) => i["label"]).includes(selected);
         if (isNew) {
-          setSelectedDep([...selectedDep, { label: selected, value: 10 }]);
+          setSelectedDep([
+            ...selectedDep,
+            {
+              label: selected,
+              value: 10,
+              id:
+                data?.filter((d) => d.title === selected).map((d) => d.id)[0] ??
+                0,
+            },
+          ]);
         } else {
         }
       });
@@ -87,6 +103,7 @@ export default function DependencyField({
                       const newObj = {
                         label: selectedDep[index].label,
                         value: value,
+                        id: selectedDep[index].id,
                       };
                       selectedDep[index] = newObj;
                       setSelectedDep([...selectedDep]);
