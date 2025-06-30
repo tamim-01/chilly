@@ -3,25 +3,27 @@ const base = process.env.API_URL;
 interface API_METHOD {
   url: string;
   params?: any;
+  headers?: object;
 }
 async function request(
   url: string,
   params?: any,
-  method: "GET" | "POST" | "DELETE" | "PUT" = "GET"
+  method: "GET" | "POST" | "DELETE" | "PUT" = "GET",
+  headers?: object
 ) {
   const options: { [k: string]: string | number | object } = {
     method,
-    headers: {
-      "Content-Type": "application/json",
-    },
     credentials: "include",
   };
   if (params) {
     if (method === "GET") {
       url += "?" + objectToQueryString(params);
     } else {
-      options.body = JSON.stringify(params);
+      options.body = params;
     }
+  }
+  if (headers) {
+    options.headers = headers;
   }
   const response = await fetch(base + url, options);
   const result = await response.json();
@@ -41,16 +43,16 @@ function get({ url, params }: API_METHOD) {
   return request(url, params);
 }
 
-function post({ url, params }: API_METHOD) {
-  return request(url, params, "POST");
+function post({ url, params, headers }: API_METHOD) {
+  return request(url, params, "POST", headers);
 }
 
-function put({ url, params }: API_METHOD) {
-  return request(url, params, "PUT");
+function put({ url, params, headers }: API_METHOD) {
+  return request(url, params, "PUT", headers);
 }
 
-function remove({ url, params }: API_METHOD) {
-  return request(url, params, "DELETE");
+function remove({ url, params, headers }: API_METHOD) {
+  return request(url, params, "DELETE", headers);
 }
 const Fetch = {
   get,
