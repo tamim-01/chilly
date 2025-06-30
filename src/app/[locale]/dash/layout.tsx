@@ -23,11 +23,11 @@ export default function DashLayout({ children }: LayoutProps) {
             localStorage.setItem("role", res.result.role);
             localStorage.setItem("id", res.result.id);
             if (path.includes("/dash/login")) {
-              r.push(`http://localhost:3000/${locale}/dash`);
+              r.push(`/${locale}/dash`);
             }
             setAuth(true);
           } else {
-            r.push(`http://localhost:3000/${locale}/dash/login`);
+            r.push(`/${locale}/dash/login`);
           }
         });
       } catch (error) {
