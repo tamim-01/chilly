@@ -4,13 +4,15 @@ import TextInput from "@/components/UI/inputs/TextInput";
 import useDebouncedCallback from "@/hooks/useDebouncedCallback";
 import discountCalc from "@/utils/discountCalc";
 import { useEffect, useState } from "react";
+import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
 export default function PriceField({
   onChange,
   error,
 }: {
   onChange: React.Dispatch<React.SetStateAction<Price | null>>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  error: any;
+  error:
+    | Merge<FieldError, FieldErrorsImpl<{ value: number; discount: number }>>
+    | undefined;
 }) {
   const [price, setPrice] = useState<Price>({
     value: 0,
@@ -66,7 +68,7 @@ export default function PriceField({
       <div className="flex flex-row mt-9 gap-4 ">
         <TextInput
           label="Discount"
-          disabled={!discount}
+          disabled={!discount || price.value <= 0}
           inputSize="lg"
           className="w-[120px]"
           error={error?.discount?.message ? true : false}

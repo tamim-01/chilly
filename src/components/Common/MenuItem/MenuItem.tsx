@@ -2,11 +2,12 @@
 import Image from "next/image";
 import Badge from "../../UI/Badge";
 import { useState } from "react";
+import discountCalc from "@/utils/discountCalc";
 
 export default function MenuItem({ item }: { item: MenuItem }) {
   const [open, setOpen] = useState(false);
   const { title, payment_type, image_urls, description, spicy } = item;
-  const offer = payment_type.discount && payment_type.afterDiscount;
+  const offer = payment_type.discount > 0;
   return (
     <article
       className=" cursor-pointer border-b-1 border-gray-600 transition-all duration-500"
@@ -37,7 +38,11 @@ export default function MenuItem({ item }: { item: MenuItem }) {
           >
             {payment_type.value}$
           </span>
-          {offer && <span>{payment_type.afterDiscount}$</span>}
+          {offer && (
+            <span>
+              {discountCalc(payment_type.discount, payment_type.value)}$
+            </span>
+          )}
         </h2>
         <p
           className={`md:text-2xl mb-3 text-base text-justify ${

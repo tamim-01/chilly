@@ -4,6 +4,7 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 interface PaginationProps {
   pageCount: number;
+  itemCount: number;
 }
 
 interface PaginationArrowProps {
@@ -34,7 +35,10 @@ const PaginationArrow: FC<PaginationArrowProps> = ({
   );
 };
 
-export function Pagination({ pageCount }: Readonly<PaginationProps>) {
+export function Pagination({
+  pageCount,
+  itemCount,
+}: Readonly<PaginationProps>) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
@@ -62,7 +66,7 @@ export function Pagination({ pageCount }: Readonly<PaginationProps>) {
         <PaginationArrow
           direction="right"
           href={createPageURL(currentPage + 1)}
-          isDisabled={currentPage >= pageCount}
+          isDisabled={currentPage >= pageCount + 1 || itemCount < 8}
         />
       </div>
     );

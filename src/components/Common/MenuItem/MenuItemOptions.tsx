@@ -1,15 +1,19 @@
 "use client";
 import Button from "@/components/UI/Button";
 import Modal from "@/components/UI/Modal";
+import { useToast } from "@/hooks/useToast";
 import Fetch from "@/utils/Fetch";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function MenuItemOptions({ id }: { id: number }) {
   const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const locale = usePathname().split("/")[1];
+  const r = useRouter();
+  const { toast } = useToast();
   return (
     <>
       <div className="flex flex-row gap-3">
@@ -48,8 +52,29 @@ export default function MenuItemOptions({ id }: { id: number }) {
           <Button
             variant="destructive"
             className="rounded-xl"
+            loading={loading}
             onClick={() => {
-              Fetch.remove({ url: `/menu/${id}` });
+              setLoading(true);
+              Fetch.remove({ url: `/menu/${id}` }).then((res) => {
+                if (res.status === "success") {
+                  setLoading(false);
+                  r.replace(`/${locale}/dash`);
+                  toast({
+                    message: "Item deleted successfully",
+                    position: "top-right",
+                    type: "success",
+                  });
+                  setModal(false);
+                } else {
+                  setLoading(false);
+                  toast({
+                    message: "Something went wrong ! try again.",
+                    position: "top-right",
+                    type: "error",
+                  });
+                  setModal(false);
+                }
+              });
             }}
           >
             Yes!

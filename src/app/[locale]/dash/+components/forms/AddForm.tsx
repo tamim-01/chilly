@@ -9,14 +9,19 @@ import FileInput from "@/components/UI/inputs/FileInput";
 import PriceField from "./PriceField";
 import Select from "@/components/UI/inputs/Select";
 import { OPTIONS } from "@/components/Common/searchPanel/options";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { TLanguages } from "@/utils/getTranslation";
 import DependencyField from "./DependencyField";
 import Textarea from "@/components/UI/inputs/Textarea";
+import { useToast } from "@/hooks/useToast";
+import Fetch from "@/utils/Fetch";
+import { useState } from "react";
 
 export default function AddForm() {
   const locale = usePathname().split("/")[1] as TLanguages;
-
+  const { toast } = useToast();
+  const r = useRouter();
+  const [loading, setLoading] = useState(false);
   const {
     handleSubmit,
     formState: { errors },
@@ -24,19 +29,21 @@ export default function AddForm() {
     control,
   } = useForm<ADD_SCHEMA>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      active: true,
+    },
     mode: "onBlur",
   });
 
-  const onSubmit: SubmitHandler<ADD_SCHEMA> = (data) => {
-    const { dependencies, images, ...rest } = data;
+  const onSubmit: SubmitHandler<ADD_SCHEMA> = async (data) => {
+    const { images, dependencies, ...rest } = data;
     const admin_id = localStorage.getItem("id");
+
     if (admin_id) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const item: Record<string, any> = rest;
-      console.log("dependencies => ", dependencies);
       const formData = new FormData();
       formData.append("admin_id", JSON.stringify(admin_id));
-      for (const key in rest) {
+      const item: Record<string, unknown> = rest;
+      for (const key in item) {
         if (Array.isArray(item[key])) {
           item[key].forEach((value) => formData.append(key, value));
         } else {
@@ -46,11 +53,29 @@ export default function AddForm() {
       images.forEach((file) => {
         formData.append("images", file);
       });
-      console.log("formData => ", formData);
-      fetch("http://localhost:3001/api/menu", {
-        method: "POST",
-        body: formData,
-        credentials: "include",
+      dependencies.forEach((d) => {
+        formData.append("dependency", JSON.stringify(d));
+      });
+      const item_id = Math.floor(Math.random() * 100000);
+      formData.append("id", item_id.toString());
+      setLoading(true);
+      await Fetch.post({ url: "/menu", params: formData }).then(async (res) => {
+        if (res.status === "success") {
+          toast({
+            message: "Item added successfully !",
+            position: "top-right",
+            type: "success",
+          });
+          setLoading(false);
+          r.push(`/${locale}/dash`);
+        } else {
+          setLoading(false);
+          toast({
+            message: "something went wrong ! try again.",
+            position: "top-right",
+            type: "error",
+          });
+        }
       });
     }
   };
@@ -146,10 +171,20 @@ export default function AddForm() {
         />
       </section>
       <section className="flex flex-row fixed bottom-1 left-4 md:static">
-        <Button variant="danger" className="rounded-xl mr-2" type="button">
+        <Button
+          variant="danger"
+          className="rounded-xl mr-2"
+          type="button"
+          onClick={() => r.push(`/${locale}/dash`)}
+        >
           cancel
         </Button>
-        <Button variant="secondary" className="rounded-xl" type="submit">
+        <Button
+          variant="secondary"
+          className="rounded-xl"
+          type="submit"
+          loading={loading}
+        >
           Confirm
         </Button>
       </section>

@@ -26,7 +26,8 @@ export default function Login({ locale }: { locale: TLanguages }) {
             try {
               const res = await Fetch.post({
                 url: "/signin",
-                params: { username, password },
+                headers: { "Content-Type": "application/json" },
+                params: JSON.stringify({ username, password }),
               });
               if (res.status === "success") {
                 setLoading(false);

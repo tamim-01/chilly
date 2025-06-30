@@ -22,8 +22,35 @@ export default function Menu() {
     items: MenuItem[];
     totalPages: number;
   }>(`api/menu/${page}?${urlParams}`);
+  const inventory =
+    useFetchedData<Array<Record<string, string | number>>>(`api/inventory`);
+  const ingredients =
+    useFetchedData<Array<Record<string, string | number>>>(
+      `api/menu/ingredients`
+    );
 
-  if (loading)
+  const filteredItems = data?.items
+    .sort(function (a, b) {
+      return a.id - b.id;
+    })
+    .filter((item) => {
+      const itemIngredients = ingredients.data?.filter(
+        (i) => i.item_id == item.id
+      );
+      const check = itemIngredients?.map((i) =>
+        Number(i.value) <
+        Number(
+          inventory.data?.filter((e) => e.id == i.inventory_id)[0]
+            .available_quantity
+        )
+          ? true
+          : false
+      );
+
+      if (check?.every((i) => i === true)) return true;
+      return false;
+    });
+  if (loading || inventory.loading || ingredients.loading) {
     return (
       <ul className="w-full py-20 flex flex-col gap-8 ">
         {Array.from({ length: 4 }).map((_, i) => (
@@ -31,6 +58,8 @@ export default function Menu() {
         ))}
       </ul>
     );
+  }
+
   if (error) {
     return (
       <section className="w-full h-80 flex flex-col justify-center items-center gap-12">
@@ -59,19 +88,18 @@ export default function Menu() {
   return (
     <>
       <ul className="w-full py-20 flex flex-col gap-8 ">
-        {data &&
-          data.items
-            .sort(function (a, b) {
-              return a.id - b.id;
-            })
-            .map((item) => (
-              <li key={item.id}>
-                <MenuItem item={item} />
-              </li>
-            ))}
+        {filteredItems &&
+          filteredItems.map((item) => (
+            <li key={item.id}>
+              <MenuItem item={item} />
+            </li>
+          ))}
       </ul>
       {data?.totalPages ? (
-        <Pagination pageCount={data?.totalPages + 1} />
+        <Pagination
+          pageCount={data?.totalPages}
+          itemCount={filteredItems?.length ?? 0}
+        />
       ) : (
         <></>
       )}

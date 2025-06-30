@@ -32,6 +32,7 @@ export const schema = z.object({
       z.object({
         label: z.string(),
         value: z.number().int().min(1, "value cant be empty"),
+        id: z.number().int(),
       })
     )
     .nonempty("you have to select at least one dependency"),
