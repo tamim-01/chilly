@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
+    "dotenv": "^17.0.1",
     "msw": "^2.9.0",
     "next": "15.3.2",
     "react": "^19.0.0",
