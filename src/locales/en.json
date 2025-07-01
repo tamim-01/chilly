@@ -23,5 +23,46 @@
       "placeholder": "Enter your password..."
     },
     "button": "Confirm"
+  },
+  "add": {
+    "successful": "Item added successfully",
+    "error": "something went wrong! try again.",
+    "update": "Item updated successfully",
+    "form": {
+      "title": {
+        "label": "Food name",
+        "place_holder": "Taco with avocado..."
+      },
+      "spicy": {
+        "label": "Is it Spicy?"
+      },
+      "visible": {
+        "label": " Visible ?"
+      },
+      "Image": {
+        "label": "Upload image",
+        "button": "Upload",
+        "uploaded_label": "Previously uploaded images"
+      },
+      "price": {
+        "label": "Price",
+        "place_holder": " 6$ for example...",
+        "discount": "Discount ? ",
+        "discount_label": "Discount",
+        "after_discount_label": "After Discount",
+        "after_discount_place_holder": "Price after discount..."
+      },
+      "dependency": {
+        "select_label": "Select a food dependency"
+      },
+      "description": {
+        "label": "Description",
+        "place_holder": "Write a brief description about the food and its ingredients..."
+      },
+      "button": {
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+      }
+    }
   }
 }
