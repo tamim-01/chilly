@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     API_URL:
       process.env.NODE_ENV === "development"
         ? "http://localhost:3001/api"
-        : "idk yet",
+        : "http://localhost:3001/api",
   },
   images: {
     remotePatterns: [
