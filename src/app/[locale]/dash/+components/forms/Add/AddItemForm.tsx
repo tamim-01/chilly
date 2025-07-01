@@ -6,19 +6,21 @@ import TextInput from "@/components/UI/inputs/TextInput";
 import Button from "@/components/UI/Button";
 import Checkbox from "@/components/UI/inputs/CheckBox";
 import FileInput from "@/components/UI/inputs/FileInput";
-import PriceField from "./PriceField";
+import PriceField from "../PriceField";
 import Select from "@/components/UI/inputs/Select";
 import { OPTIONS } from "@/components/Common/searchPanel/options";
 import { usePathname, useRouter } from "next/navigation";
-import { TLanguages } from "@/utils/getTranslation";
-import DependencyField from "./DependencyField";
+import getTranslation, { TLanguages } from "@/utils/getTranslation";
+import DependencyField from "../DependencyField";
 import Textarea from "@/components/UI/inputs/Textarea";
 import { useToast } from "@/hooks/useToast";
 import Fetch from "@/utils/Fetch";
 import { useState } from "react";
+import { variables } from "@/locales/variables";
 
-export default function AddForm() {
+export default function AddItemForm() {
   const locale = usePathname().split("/")[1] as TLanguages;
+  const t = getTranslation(locale, variables);
   const { toast } = useToast();
   const r = useRouter();
   const [loading, setLoading] = useState(false);
@@ -62,7 +64,7 @@ export default function AddForm() {
       await Fetch.post({ url: "/menu", params: formData }).then(async (res) => {
         if (res.status === "success") {
           toast({
-            message: "Item added successfully !",
+            message: t("add.successful"),
             position: "top-right",
             type: "success",
           });
@@ -71,7 +73,7 @@ export default function AddForm() {
         } else {
           setLoading(false);
           toast({
-            message: "something went wrong ! try again.",
+            message: t("add.error"),
             position: "top-right",
             type: "error",
           });
@@ -91,21 +93,21 @@ export default function AddForm() {
             <TextInput
               {...register("title")}
               fullWidth
-              label="Food title"
+              label={t("add.form.title.label")}
               type="text"
               error={errors?.["title"]?.message ? true : false}
               errorMessage={errors?.["title"]?.message}
-              placeholder="Taco with avocado..."
+              placeholder={t("add.form.title.place_holder")}
             />
             <Checkbox
               {...register("spicy")}
-              label="Is it Spicy?"
+              label={t("add.form.spicy.label")}
               className="mt-9 text-nowrap"
             />
           </div>
           <Checkbox
             {...register("active")}
-            label="visible ? "
+            label={t("add.form.visible.label")}
             inputSize="lg"
             className="mt-4 text-nowrap"
           />
@@ -114,7 +116,7 @@ export default function AddForm() {
             control={control}
             render={({ field: { onChange } }) => (
               <Select
-                label="Category"
+                label={t("menu.category.label")}
                 className="mt-9 text-[18px]"
                 error={errors?.["category"]?.message ? true : false}
                 errorMessage={errors?.["category"]?.message}
@@ -131,12 +133,12 @@ export default function AddForm() {
             render={({ field: { onChange } }) => (
               <FileInput
                 fullWidth
-                label="Upload images"
+                label={t("add.form.Image.label")}
                 multiple
                 onFilesSelected={onChange}
                 droppable
                 accept="image/jpeg , image/png , image/jpg , image/webp"
-                buttonText="Upload"
+                buttonText={t("add.form.Image.button")}
                 error={errors?.["images"]?.message ? true : false}
                 errorMessage={errors?.["images"]?.message?.toString()}
               />
@@ -148,7 +150,12 @@ export default function AddForm() {
           control={control}
           name="payment_type"
           render={({ field: { onChange } }) => (
-            <PriceField onChange={onChange} error={errors.payment_type} />
+            <PriceField
+              onChange={onChange}
+              error={errors.payment_type}
+              locale={locale}
+              hasDefaultValue={false}
+            />
           )}
         />
       </section>
@@ -156,7 +163,12 @@ export default function AddForm() {
         control={control}
         name="dependencies"
         render={({ field: { onChange } }) => (
-          <DependencyField onChange={onChange} error={errors.dependencies} />
+          <DependencyField
+            locale={locale}
+            onChange={onChange}
+            error={errors.dependencies}
+            hasDefaultValue={false}
+          />
         )}
       />
       <section>
@@ -164,10 +176,10 @@ export default function AddForm() {
           error={errors.description?.message ? true : false}
           errorMessage={errors.description?.message}
           {...register("description")}
-          label="Description"
+          label={t("add.form.description.label")}
           fullWidth
           resize="vertical"
-          placeholder="Write a brief description about the food and its ingredients..."
+          placeholder={t("add.form.description.place_holder")}
         />
       </section>
       <section className="flex flex-row fixed bottom-1 left-4 md:static">
@@ -177,7 +189,7 @@ export default function AddForm() {
           type="button"
           onClick={() => r.push(`/${locale}/dash`)}
         >
-          cancel
+          {t("add.form.button.cancel")}
         </Button>
         <Button
           variant="secondary"
@@ -185,7 +197,7 @@ export default function AddForm() {
           type="submit"
           loading={loading}
         >
-          Confirm
+          {t("add.form.button.confirm")}
         </Button>
       </section>
     </form>

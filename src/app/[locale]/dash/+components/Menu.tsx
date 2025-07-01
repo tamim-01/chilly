@@ -32,7 +32,7 @@ export default function Menu() {
 
   const filteredItems = data?.items
     .sort(function (a, b) {
-      return a.id - b.id;
+      return b.id - a.id;
     })
     .filter((item) => {
       const itemIngredients = ingredients.data?.filter(
@@ -91,7 +91,7 @@ export default function Menu() {
         {filteredItems &&
           filteredItems
             .sort(function (a, b) {
-              return a.id - b.id;
+              return b.id - a.id;
             })
             .map((item) => (
               <li key={item.id}>

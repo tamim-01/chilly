@@ -22,22 +22,13 @@ export default function MenuItemOptions({ id }: { id: number }) {
           variant="secondary"
           onClick={() => setModal(true)}
         >
-          <Image src={"/icon/delete.svg"} width={18} height={18} alt="delete" />
+          <Image src={"/icon/delete.svg"} width={14} height={14} alt="delete" />
         </Button>
         <Link href={`/${locale}/dash/edit/${id}`}>
           <Button className="rounded-full py-4 mb-6" variant="secondary">
-            <Image src={"/icon/edit.svg"} width={18} height={18} alt="edit" />
+            <Image src={"/icon/edit.svg"} width={14} height={14} alt="edit" />
           </Button>
         </Link>
-
-        <Button className="rounded-full py-4 mb-6" variant="secondary">
-          <Image
-            src={"/icon/visibility.svg"}
-            width={18}
-            height={18}
-            alt="visibility"
-          />
-        </Button>
       </div>
       <Modal
         variant="default"

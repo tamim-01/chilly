@@ -23,5 +23,46 @@
       "placeholder": "رمز عبور خود را وارد کنید..."
     },
     "button": "تایید"
+  },
+  "add": {
+    "successful": "آیتم با موفقیت ساخته شد",
+    "error": "حطایی رخ داد لطفا دوباره تلاش کنید!",
+    "update": "آیتم با موفقیت آپدیت شد",
+    "form": {
+      "title": {
+        "label": "اسم غذا",
+        "place_holder": "به طور مثال تاکو..."
+      },
+      "spicy": {
+        "label": "این غذا تند است ؟ "
+      },
+      "visible": {
+        "label": "آیتم دیده بشود؟"
+      },
+      "Image": {
+        "label": "آپلود کردن عکس",
+        "button": "Upload",
+        "uploaded_label": "عکس های از قبل آپلود شده"
+      },
+      "price": {
+        "label": "قیمت",
+        "place_holder": " 6$ for example...",
+        "discount": "تخفیف دارد ؟",
+        "discount_label": "تخفیف",
+        "after_discount_label": " بعد از تخفیف",
+        "after_discount_place_holder": "قیمت بعد از اعمال تخفیف..."
+      },
+      "dependency": {
+        "select_label": "تشکیل دهنده غذا"
+      },
+      "description": {
+        "label": "توضیحات",
+        "place_holder": "یک متن خلاصه درباره غذا بنویسید..."
+      },
+      "button": {
+        "cancel": "انصراف",
+        "confirm": "تایید"
+      }
+    }
   }
 }
