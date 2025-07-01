@@ -66,7 +66,7 @@ export function Pagination({
         <PaginationArrow
           direction="right"
           href={createPageURL(currentPage + 1)}
-          isDisabled={currentPage >= pageCount + 1 || itemCount < 8}
+          isDisabled={currentPage >= pageCount || itemCount < 8}
         />
       </div>
     );
