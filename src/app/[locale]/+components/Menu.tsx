@@ -29,27 +29,23 @@ export default function Menu() {
       `api/menu/ingredients`
     );
 
-  const filteredItems = data?.items
-    .sort(function (a, b) {
-      return a.id - b.id;
-    })
-    .filter((item) => {
-      const itemIngredients = ingredients.data?.filter(
-        (i) => i.item_id == item.id
-      );
-      const check = itemIngredients?.map((i) =>
-        Number(i.value) <
-        Number(
-          inventory.data?.filter((e) => e.id == i.inventory_id)[0]
-            .available_quantity
-        )
-          ? true
-          : false
-      );
+  const filteredItems = data?.items.filter((item) => {
+    const itemIngredients = ingredients.data?.filter(
+      (i) => i.item_id == item.id
+    );
+    const check = itemIngredients?.map((i) =>
+      Number(i.value) <
+      Number(
+        inventory.data?.filter((e) => e.id == i.inventory_id)[0]
+          .available_quantity
+      )
+        ? true
+        : false
+    );
 
-      if (check?.every((i) => i === true)) return true;
-      return false;
-    });
+    if (check?.every((i) => i === true)) return true;
+    return false;
+  });
   if (loading || inventory.loading || ingredients.loading) {
     return (
       <ul className="w-full py-20 flex flex-col gap-8 ">
@@ -89,11 +85,15 @@ export default function Menu() {
     <>
       <ul className="w-full py-20 flex flex-col gap-8 ">
         {filteredItems &&
-          filteredItems.map((item) => (
-            <li key={item.id}>
-              <MenuItem item={item} />
-            </li>
-          ))}
+          filteredItems
+            .sort(function (a, b) {
+              return b.id - a.id;
+            })
+            .map((item) => (
+              <li key={item.id}>
+                <MenuItem item={item} />
+              </li>
+            ))}
       </ul>
       {data?.totalPages ? (
         <Pagination
