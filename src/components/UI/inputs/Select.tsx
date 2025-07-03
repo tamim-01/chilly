@@ -148,7 +148,7 @@ const Select = ({
   `;
 
   const triggerStyles = `
-    border w-full rounded-[16px] md:px-6 px-3 py-3 transition flex flex-row justify-between gap-6 items-center 
+    border w-full rounded-[16px] md:px-6 px-3 py-3 transition flex flex-row justify-between gap-6 items-center overflow-hidden
     ${
       disabled
         ? "bg-muted text-muted-foreground cursor-not-allowed"

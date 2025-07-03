@@ -78,7 +78,7 @@ export default function DependencyField({
   }, [selectedDep, onChange]);
   const t = getTranslation(locale, variables);
   return (
-    <section className="w-full">
+    <section className="md:max-w-[800px]">
       {loading ? (
         <div className="my-6">
           <p className=" text-[18px]">Food dependency</p>
